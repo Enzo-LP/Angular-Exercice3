@@ -1,0 +1,47 @@
+<div class="transaction-list">
+    <h2>Historique des transactions</h2>
+  
+    <div class="controls">
+      <input
+        type="text"
+        [(ngModel)]="searchTerm"
+        (input)="onSearchChange()"
+        placeholder="Rechercher..."
+        class="search-input"
+      >
+    </div>
+  
+    <div class="table-container">
+      <table>
+        <thead>
+          <tr>
+            @for (col of columns; track col.key) {
+              <th (click)="sortTransactions(col.key)">
+                {{ col.label }}
+                @if (sortedColumn === col.key) {
+                  <span>{{ sortDirection === 'asc' ? '↑' : '↓' }}</span>
+                }
+              </th>
+            }
+          </tr>
+        </thead>
+        <tbody>
+          @for (transaction of filteredTransactions; track transaction.id) {
+            <tr (click)="viewTransaction(transaction.id)">
+              <td>{{ transaction.date | date:'dd/MM/yyyy HH:mm' }}</td>
+              <td>{{ transaction.label }}</td>
+              <td [class.positive]="transaction.amount >= 0" [class.negative]="transaction.amount < 0">
+                {{ transaction.amount | currency:'EUR':'symbol':'1.2-2' }}
+              </td>
+              <td>{{ transaction.balance | currency:'EUR':'symbol':'1.2-2' }}</td>
+            </tr>
+          }
+          @if (filteredTransactions.length === 0) {
+            <tr>
+              <td colspan="4" class="no-results">Aucune transaction trouvée</td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  </div>

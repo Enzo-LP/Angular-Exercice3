@@ -2,6 +2,31 @@
 
 This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.1.5.
 
+
+## 🚀 Lancer le projet avec Docker
+
+### ✅ Prérequis
+
+- [Docker Desktop](https://www.docker.com/products/docker-desktop) installé (Windows, Mac, Linux)
+- Accès à un terminal ou PowerShell
+
+---
+
+### 🔧 Étapes
+
+1. **Construire l'image Docker :**
+
+```bash
+docker build -t angular-exercice3 .   
+```
+
+2. **Exécuter le conteneur :**
+
+```bash
+docker run -d -p 8080:80 angular-exercice3
+```
+
+
 ## Development server
 
 To start a local development server, run:
